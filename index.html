@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distributed Rate Limiter Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel">
+        <p class="eyebrow">Backend Systems</p>
+        <h1>Distributed Rate Limiter Simulator</h1>
+        <p class="desc">Stress-test traffic policies across multiple edge nodes and compare drop behavior under burst load.</p>
+
+        <div class="card">
+          <h2>Policy</h2>
+          <label>Limiter Type
+            <select id="policySelect">
+              <option value="token">Token Bucket</option>
+              <option value="leaky">Leaky Bucket</option>
+              <option value="window">Fixed Window</option>
+            </select>
+          </label>
+          <label>Nodes
+            <input id="nodesInput" type="range" min="2" max="8" step="1" value="5" />
+            <span id="nodesValue">5</span>
+          </label>
+          <label>Incoming RPS
+            <input id="rpsInput" type="range" min="40" max="520" step="10" value="210" />
+            <span id="rpsValue">210</span>
+          </label>
+          <label>Burst Factor
+            <input id="burstInput" type="range" min="1" max="4" step="0.1" value="2.1" />
+            <span id="burstValue">2.1</span>
+          </label>
+        </div>
+
+        <div class="card">
+          <h2>Controls</h2>
+          <div class="row">
+            <button id="startBtn">Start</button>
+            <button id="pauseBtn">Pause</button>
+          </div>
+          <div class="row">
+            <button id="spikeBtn">Traffic Spike</button>
+            <button id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <div class="card metrics">
+          <h2>Metrics</h2>
+          <p>Accepted: <strong id="acceptedText">0</strong></p>
+          <p>Dropped: <strong id="droppedText">0</strong></p>
+          <p>Drop Rate: <strong id="dropRateText">0%</strong></p>
+          <p>Avg Queue: <strong id="queueText">0</strong></p>
+        </div>
+      </section>
+
+      <section class="viz-wrap">
+        <canvas id="viz" width="980" height="620"></canvas>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
